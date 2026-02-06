@@ -1,12 +1,13 @@
 CXX = g++
-CXXFLAGS = -Wall -Wextra -std=c++17
+CXXFLAGS = -std=c++17 -Wall -pthread
 
-TARGET = build/server
-SRC = src/main.cpp
+SRC = src/main.cpp src/Server.cpp src/ThreadPool.cpp
+INC = -Iinclude
+
+TARGET = server
 
 all:
-	$(CXX) $(CXXFLAGS) $(SRC) -o $(TARGET)
+	$(CXX) $(CXXFLAGS) $(SRC) $(INC) -o $(TARGET)
 
 clean:
-	rm -f $(TARGET)
-
+	rm -f server
