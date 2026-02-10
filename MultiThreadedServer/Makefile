@@ -1,13 +1,31 @@
+# Compiler
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -pthread
 
-SRC = src/main.cpp src/Server.cpp src/ThreadPool.cpp
-INC = -Iinclude
+# Compiler flags
+CXXFLAGS = -std=c++17 -Wall -Wextra -pthread
 
+# Directories
+SRC_DIR = src
+INC_DIR = inc
+
+# Source files
+SRCS = $(SRC_DIR)/main.cpp \
+       $(SRC_DIR)/Server.cpp \
+       $(SRC_DIR)/Threadpool.cpp
+
+# Output binary
 TARGET = server
 
-all:
-	$(CXX) $(CXXFLAGS) $(SRC) $(INC) -o $(TARGET)
+# Build target
+all: $(TARGET)
 
+$(TARGET): $(SRCS)
+	$(CXX) $(CXXFLAGS) -I$(INC_DIR) $(SRCS) -o $(TARGET)
+
+# Clean build
 clean:
-	rm -f server
+	rm -f $(TARGET)
+
+# Rebuild from scratch
+rebuild: clean all
+
